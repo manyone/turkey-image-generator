@@ -16,7 +16,9 @@ const PromptDisplay = ({ prompt, onReset }: PromptDisplayProps) => {
   const handleGenerateImage = async () => {
     try {
       console.log("Starting image generation");
-      const url = await generateImage(prompt);
+      const result = await generateImage(prompt);
+      // Extract the URL from the response object
+      const url = result[0]?.url || null;
       setImageUrl(url);
       console.log("Image URL set:", url);
       toast({
