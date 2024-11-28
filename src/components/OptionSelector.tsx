@@ -16,7 +16,7 @@ const OptionSelector = ({
 }: OptionSelectorProps) => {
   return (
     <div className="space-y-3 animate-fade-up">
-      <h3 className="text-lg font-medium capitalize">
+      <h3 className="text-lg font-bold capitalize text-primary">
         {category.replace(/([A-Z])/g, " $1").trim()}
       </h3>
       <div className="grid grid-cols-2 gap-3">

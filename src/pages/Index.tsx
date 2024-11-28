@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
-import { Sparkles } from "lucide-react";
+import { Sparkles, PartyPopper, ChefHat } from "lucide-react";
 import OptionSelector from "@/components/OptionSelector";
 import { generatePrompt } from "@/lib/promptGenerator";
 import PromptDisplay from "@/components/PromptDisplay";
@@ -82,9 +82,15 @@ const Index = () => {
     <div className="min-h-screen bg-background p-6 animate-fade-in">
       <div className="max-w-4xl mx-auto space-y-8">
         <header className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">Turkey Generator</h1>
+          <div className="flex items-center justify-center gap-3">
+            <ChefHat className="w-8 h-8 text-primary" />
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-orange-400 via-red-500 to-purple-600 bg-clip-text text-transparent">
+              Turkey Image Generator
+            </h1>
+            <PartyPopper className="w-8 h-8 text-primary" />
+          </div>
           <p className="text-muted-foreground">
-            Create unique turkey prompts for image generation
+            Create unique turkey images with AI magic
           </p>
           <Button 
             onClick={handleSurpriseMe}
