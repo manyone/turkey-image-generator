@@ -1,9 +1,23 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import { Sparkles } from "lucide-react";
 import OptionSelector from "@/components/OptionSelector";
 import { generatePrompt } from "@/lib/promptGenerator";
 import PromptDisplay from "@/components/PromptDisplay";
+import { getRandomSelections } from "@/lib/randomSelector";
+
+const OPTIONS = {
+  theme: ["Thanksgiving", "Space Adventure", "Underwater Exploration", "Fantasy Kingdom", "Cyberpunk Future"],
+  background: ["Autumn Forest", "Starry Sky", "Ocean Depths", "Medieval Castle", "Neon Cityscape"],
+  character: ["Traditional Turkey", "Robo-Turkey", "Mer-Turkey", "Dragon-Turkey", "Cyber-Turkey"],
+  style: ["Cartoon", "Realistic", "Surreal", "Pixel Art", "Watercolor"],
+  colorScheme: ["Autumnal", "Neon", "Pastel", "Monochrome", "Rainbow"],
+  accessories: ["Pilgrim Hat", "Astronaut Helmet", "Mermaid Tail", "Wizard Hat", "Cybernetic Enhancements"],
+  expression: ["Happy", "Surprised", "Angry", "Sleepy", "Confused"],
+  pose: ["Strutting", "Flying", "Sitting", "Dancing", "Fighting"],
+};
 
 const Index = () => {
   const [selections, setSelections] = useState({
@@ -43,6 +57,16 @@ const Index = () => {
     });
   };
 
+  const handleSurpriseMe = () => {
+    console.log("Generating random selections");
+    const randomSelections = getRandomSelections(OPTIONS);
+    setSelections(randomSelections);
+    toast({
+      title: "Surprise!",
+      description: "Random options have been selected for you.",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background p-6 animate-fade-in">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -51,58 +75,41 @@ const Index = () => {
           <p className="text-muted-foreground">
             Create unique turkey prompts for image generation
           </p>
+          <Button 
+            onClick={handleSurpriseMe}
+            className="flex items-center gap-2"
+          >
+            <Sparkles className="w-4 h-4" />
+            Surprise Me!
+          </Button>
         </header>
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-6">
             <OptionSelector
               category="theme"
-              options={[
-                "Thanksgiving",
-                "Space Adventure",
-                "Underwater Exploration",
-                "Fantasy Kingdom",
-                "Cyberpunk Future",
-              ]}
+              options={OPTIONS.theme}
               selected={selections.theme}
               onSelect={(value) => handleSelect("theme", value)}
             />
             
             <OptionSelector
               category="background"
-              options={[
-                "Autumn Forest",
-                "Starry Sky",
-                "Ocean Depths",
-                "Medieval Castle",
-                "Neon Cityscape",
-              ]}
+              options={OPTIONS.background}
               selected={selections.background}
               onSelect={(value) => handleSelect("background", value)}
             />
 
             <OptionSelector
               category="character"
-              options={[
-                "Traditional Turkey",
-                "Robo-Turkey",
-                "Mer-Turkey",
-                "Dragon-Turkey",
-                "Cyber-Turkey",
-              ]}
+              options={OPTIONS.character}
               selected={selections.character}
               onSelect={(value) => handleSelect("character", value)}
             />
 
             <OptionSelector
               category="style"
-              options={[
-                "Cartoon",
-                "Realistic",
-                "Surreal",
-                "Pixel Art",
-                "Watercolor",
-              ]}
+              options={OPTIONS.style}
               selected={selections.style}
               onSelect={(value) => handleSelect("style", value)}
             />
@@ -111,52 +118,28 @@ const Index = () => {
           <div className="space-y-6">
             <OptionSelector
               category="colorScheme"
-              options={[
-                "Autumnal",
-                "Neon",
-                "Pastel",
-                "Monochrome",
-                "Rainbow",
-              ]}
+              options={OPTIONS.colorScheme}
               selected={selections.colorScheme}
               onSelect={(value) => handleSelect("colorScheme", value)}
             />
 
             <OptionSelector
               category="accessories"
-              options={[
-                "Pilgrim Hat",
-                "Astronaut Helmet",
-                "Mermaid Tail",
-                "Wizard Hat",
-                "Cybernetic Enhancements",
-              ]}
+              options={OPTIONS.accessories}
               selected={selections.accessories}
               onSelect={(value) => handleSelect("accessories", value)}
             />
 
             <OptionSelector
               category="expression"
-              options={[
-                "Happy",
-                "Surprised",
-                "Angry",
-                "Sleepy",
-                "Confused",
-              ]}
+              options={OPTIONS.expression}
               selected={selections.expression}
               onSelect={(value) => handleSelect("expression", value)}
             />
 
             <OptionSelector
               category="pose"
-              options={[
-                "Strutting",
-                "Flying",
-                "Sitting",
-                "Dancing",
-                "Fighting",
-              ]}
+              options={OPTIONS.pose}
               selected={selections.pose}
               onSelect={(value) => handleSelect("pose", value)}
             />
