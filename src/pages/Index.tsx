@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
-import { Copy, RefreshCw } from "lucide-react";
 import OptionSelector from "@/components/OptionSelector";
 import { generatePrompt } from "@/lib/promptGenerator";
+import PromptDisplay from "@/components/PromptDisplay";
 
 const Index = () => {
   const [selections, setSelections] = useState({
@@ -41,16 +40,6 @@ const Index = () => {
     toast({
       title: "Reset complete",
       description: "All selections have been cleared.",
-    });
-  };
-
-  const handleCopyPrompt = () => {
-    const prompt = generatePrompt(selections);
-    navigator.clipboard.writeText(prompt);
-    console.log("Copied prompt:", prompt);
-    toast({
-      title: "Prompt copied!",
-      description: "The generated prompt has been copied to your clipboard.",
     });
   };
 
@@ -174,31 +163,10 @@ const Index = () => {
           </div>
         </div>
 
-        <Card className="p-6 mt-8">
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Generated Prompt</h2>
-            <p className="text-muted-foreground min-h-[4rem] p-4 bg-muted rounded-md">
-              {generatePrompt(selections)}
-            </p>
-            <div className="flex gap-4">
-              <Button
-                onClick={handleCopyPrompt}
-                className="flex items-center gap-2"
-              >
-                <Copy className="w-4 h-4" />
-                Copy Prompt
-              </Button>
-              <Button
-                variant="outline"
-                onClick={handleReset}
-                className="flex items-center gap-2"
-              >
-                <RefreshCw className="w-4 h-4" />
-                Reset
-              </Button>
-            </div>
-          </div>
-        </Card>
+        <PromptDisplay 
+          prompt={generatePrompt(selections)}
+          onReset={handleReset}
+        />
       </div>
     </div>
   );
