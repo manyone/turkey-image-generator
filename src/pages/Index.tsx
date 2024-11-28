@@ -19,8 +19,19 @@ const OPTIONS = {
   pose: ["Strutting", "Flying", "Sitting", "Dancing", "Fighting"],
 };
 
+interface Selections {
+  theme: string;
+  background: string;
+  character: string;
+  style: string;
+  colorScheme: string;
+  accessories: string;
+  expression: string;
+  pose: string;
+}
+
 const Index = () => {
-  const [selections, setSelections] = useState({
+  const [selections, setSelections] = useState<Selections>({
     theme: "",
     background: "",
     character: "",
